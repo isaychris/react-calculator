@@ -1,2 +1,5 @@
 # react-calculator
-A simple calculator powered by react
+A simple calculater powered by React. 
+
+### TODO:
+* Styling
