@@ -6,6 +6,7 @@ https://isaychris.github.io/react-calculator/
 
 ### Features:
 * History (clickable)
-* Input error handling
+* Input from keyboard or mouse
+* Error handling
 
-![Image](https://i.imgur.com/PXGYvdK.png)
+![Image](https://i.imgur.com/oumVbiD.png)

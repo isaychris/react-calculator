@@ -4,7 +4,7 @@ import React from 'react';
 const Display = (props) => {
     return (
         <div className="display">
-            <input type="text" value={props.action}/>
+            <input type="text" value={props.input} onChange={(e) => props.handleChange(e) }/>
         </div>
     );
   }

@@ -34,7 +34,7 @@ body {
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    width: 500px;
+    width: 450px;
     padding: 0 20px 20px 20px;
     border: 1px solid lightgray;
     border-radius: 5px;
@@ -51,7 +51,7 @@ body {
     border: 1px solid lightgray;
     min-height: 45px;
     overflow-y: scroll;
-    max-height: 120px;
+    max-height: 128px;
     padding: 5px;
     color: gray;
 }
@@ -101,5 +101,5 @@ input {
     text-align: right;
     border: 1px solid lightgray;
     background-color: #fafafa;
-
+    width: 100%;
 }
