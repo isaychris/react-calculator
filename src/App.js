@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import Key from './key'
-import Display from './display'
+import Key from './components/key'
+import Display from './components/display'
+import History from './components/history'
+
+import './App.css'
+
 const math = require('mathjs')
 
 class App extends Component {
@@ -8,14 +12,32 @@ class App extends Component {
 		super(props);
 				
 		this.state = {
-				input: ""
+                input: "",
+                prev: "",
+                history: [],
 		}
 }
+
+    updateDisplayHistory = (new_expression) => {
+        this.setState({input: new_expression})
+    }
+    
+    addToHistory = (new_expression) => {
+        this.setState({history:[...this.state.history, new_expression]})
+    }
+
 	updateDisplay = (new_input) => {
+        if(["*", "/", ".", "+", "-", "^"].includes(new_input)) {
+            if(this.state.prev === new_input) {
+                return;
+            }
+        }
+
 		if(this.state.input === "error") {
 			this.setState({input: new_input})
 
 		} else {
+            this.setState({prev: new_input})
 			this.setState({input: this.state.input + new_input})
 		}
 	}
@@ -27,10 +49,10 @@ class App extends Component {
 calculate = () => {
 	if(this.state.input !== ""){
 	try {
-		let result = math.eval(this.state.input)
-		this.setState({input: result})
-		console.log(result)
+        let result = math.eval(this.state.input)
 
+        this.addToHistory(this.state.input)
+		this.setState({input: result})
 	} catch(e) {
 			this.setState({input: "error"})
 		}
@@ -39,12 +61,14 @@ calculate = () => {
 	render() {
 		return (
 			<div className="App container">
-				<Display action={this.state.input}/>
+                <h3>react-calculator</h3>
+				<Display action={this.state.input}/><br/>
 
 				<div className="row">
 					<Key value="Clear" handleClick={this.clearDisplay}/>
-					<Key value="(" handleClick={this.updateDisplay}/>
+                    <Key value="(" handleClick={this.updateDisplay}/>
 					<Key value=")" handleClick={this.updateDisplay}/>
+					<Key value="^" handleClick={this.updateDisplay}/>
 				</div>
 
 				<div className="row">
@@ -73,7 +97,8 @@ calculate = () => {
 					<Key value="." handleClick={this.updateDisplay}/>
 					<Key value="=" handleClick={this.calculate}/>
 					<Key value="/" handleClick={this.updateDisplay}/>
-				</div>
+				</div><br/>
+                <History history={this.state.history} updateDisplayHistory={this.updateDisplayHistory}/>
 			</div>
 		);
 	}
