@@ -82,49 +82,49 @@ class App extends Component {
                     <span className="App-name">react-calculator</span>
                 </div>
                 
-				<Display action={this.state.input}/><br/>
+                <Display action={this.state.input}/><br/>
 
-				<div className="row">
-					<Key value="Clear" handleClick={this.clearDisplay}/>
+                <div className="row">
+                    <Key value="Clear" handleClick={this.clearDisplay}/>
                     <Key value="(" handleClick={this.updateDisplay}/>
-					<Key value=")" handleClick={this.updateDisplay}/>
-					<Key value="^" handleClick={this.updateDisplay}/>
-				</div>
+                    <Key value=")" handleClick={this.updateDisplay}/>
+                    <Key value="^" handleClick={this.updateDisplay}/>
+                </div>
 
-				<div className="row">
-					<Key value="7" handleClick={this.updateDisplay}/>
-					<Key value="8" handleClick={this.updateDisplay}/>
-					<Key value="9" handleClick={this.updateDisplay}/>
-					<Key value="+" handleClick={this.updateDisplay}/>
-				</div>
+                <div className="row">
+                    <Key value="7" handleClick={this.updateDisplay}/>
+                    <Key value="8" handleClick={this.updateDisplay}/>
+                    <Key value="9" handleClick={this.updateDisplay}/>
+                    <Key value="+" handleClick={this.updateDisplay}/>
+                </div>
 
-				<div className="row">
-					<Key value="4" handleClick={this.updateDisplay}/>
-					<Key value="5" handleClick={this.updateDisplay}/>
-					<Key value="6" handleClick={this.updateDisplay}/>
-					<Key value="-" handleClick={this.updateDisplay}/>
-				</div>
+                <div className="row">
+                    <Key value="4" handleClick={this.updateDisplay}/>
+                    <Key value="5" handleClick={this.updateDisplay}/>
+                    <Key value="6" handleClick={this.updateDisplay}/>
+                    <Key value="-" handleClick={this.updateDisplay}/>
+                </div>
 
-				<div className="row">
-					<Key value="1" handleClick={this.updateDisplay}/>
-					<Key value="2" handleClick={this.updateDisplay}/>
-					<Key value="3" handleClick={this.updateDisplay}/>
-					<Key value="*" handleClick={this.updateDisplay}/>
-				</div>
+                <div className="row">
+                    <Key value="1" handleClick={this.updateDisplay}/>
+                    <Key value="2" handleClick={this.updateDisplay}/>
+                    <Key value="3" handleClick={this.updateDisplay}/>
+                    <Key value="*" handleClick={this.updateDisplay}/>
+                </div>
 
-				<div className="row">
-					<Key value="0" handleClick={this.updateDisplay}/>
-					<Key value="." handleClick={this.updateDisplay}/>
-					<Key value="=" handleClick={this.calculate}/>
-					<Key value="/" handleClick={this.updateDisplay}/>
-				</div><br/>
+                <div className="row">
+                    <Key value="0" handleClick={this.updateDisplay}/>
+                    <Key value="." handleClick={this.updateDisplay}/>
+                    <Key value="=" handleClick={this.calculate}/>
+                    <Key value="/" handleClick={this.updateDisplay}/>
+                </div><br/>
 
                 <History history={this.state.history} updateDisplayHistory={this.updateDisplayHistory}/><br/>
 
                 <div className="footer">
                     <a href="https://github.com/isaychris/react-calculator">View the project on GitHub</a>
                 </div>
-			</div>
+            </div>
         );
     }
 }
