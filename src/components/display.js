@@ -1,6 +1,6 @@
 import React from 'react';
 
-// testing functional component
+// This is a class component which shows the users input
 const Display = (props) => {
     return (
         <div className="display">

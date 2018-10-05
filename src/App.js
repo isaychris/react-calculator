@@ -2,66 +2,86 @@ import React, { Component } from 'react';
 import Key from './components/key'
 import Display from './components/display'
 import History from './components/history'
-
+import logo from './logo.svg';
 import './App.css'
 
 const math = require('mathjs')
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-				
-		this.state = {
-                input: "",
-                prev: "",
-                history: [],
-		}
-}
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            input: "",
+            prev: "",
+            history: [],
+        }
+    }
 
     updateDisplayHistory = (new_expression) => {
-        this.setState({input: new_expression})
-    }
-    
-    addToHistory = (new_expression) => {
-        this.setState({history:[...this.state.history, new_expression]})
+        this.setState({
+            input: new_expression
+        })
     }
 
-	updateDisplay = (new_input) => {
+    addToHistory = (new_expression) => {
+        this.setState({
+            history: [...this.state.history, new_expression]
+        })
+    }
+
+    updateDisplay = (new_input) => {
         if(["*", "/", ".", "+", "-", "^"].includes(new_input)) {
             if(this.state.prev === new_input) {
                 return;
             }
         }
 
-		if(this.state.input === "error") {
-			this.setState({input: new_input})
+        if(this.state.input === "error") {
+            this.setState({
+                input: new_input
+            })
 
-		} else {
-            this.setState({prev: new_input})
-			this.setState({input: this.state.input + new_input})
-		}
-	}
+        } else {
+            this.setState({
+                prev: new_input
+            })
+            this.setState({
+                input: this.state.input + new_input
+            })
+        }
+    }
 
-	clearDisplay = () => {
-		this.setState({input:""})
-}
+    clearDisplay = () => {
+        this.setState({
+            input: ""
+        })
+    }
 
-calculate = () => {
-	if(this.state.input !== ""){
-	try {
-        let result = math.eval(this.state.input)
+    calculate = () => {
+        if(this.state.input !== "") {
+            try {
+                let result = math.eval(this.state.input)
 
-        this.addToHistory(this.state.input)
-		this.setState({input: result})
-	} catch(e) {
-			this.setState({input: "error"})
-		}
-}
-}
-	render() {
-		return (
-			<div className="App container">
-                <h3>react-calculator</h3>
+                this.addToHistory(this.state.input)
+                this.setState({
+                    input: result
+                })
+            } catch (e) {
+                this.setState({
+                    input: "error"
+                })
+            }
+        }
+    }
+    render() {
+        return (
+            <div className="App container">
+                <div className="header">
+                    <img src={logo} className="App-logo" width="50" height="50" alt="logo" />
+                    <span className="App-name">react-calculator</span>
+                </div>
+                
 				<Display action={this.state.input}/><br/>
 
 				<div className="row">
@@ -98,10 +118,15 @@ calculate = () => {
 					<Key value="=" handleClick={this.calculate}/>
 					<Key value="/" handleClick={this.updateDisplay}/>
 				</div><br/>
-                <History history={this.state.history} updateDisplayHistory={this.updateDisplayHistory}/>
+
+                <History history={this.state.history} updateDisplayHistory={this.updateDisplayHistory}/><br/>
+
+                <div className="footer">
+                    <a href="https://github.com/isaychris/react-calculator">View the project on GitHub</a>
+                </div>
 			</div>
-		);
-	}
+        );
+    }
 }
 
 export default App;
