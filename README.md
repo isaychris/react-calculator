@@ -1,5 +1,8 @@
 # react-calculator
-A simple calculater powered by React. 
+A simple calculator powered by React. 
+
+### Website:
+https://isaychris.github.io/react-calculator/
 
 ### Features:
 * History (clickable)
