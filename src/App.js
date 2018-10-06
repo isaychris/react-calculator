@@ -20,12 +20,13 @@ class App extends Component {
     // callback for display component; handles and filters the changing input from keyboard.
     handleChange = (e) => {
         let char = e.target.value[e.target.value.length - 1]
+
         if(["*", "/", ".", "+", "-", "^", 
             "(", ")", "0", "1", "2", "3", 
             "4", "5", "6", "7", "8", "9", undefined].includes(char)) {
-        this.setState({input: e.target.value})
+            this.setState({input: e.target.value})
+        }
     }
-}
 
     // callback for history component; updates the display when user clicks on history list.
     updateDisplayHistory = (history_exp) => {
@@ -38,30 +39,35 @@ class App extends Component {
     updateDisplay = (new_input) => {
         let prev = this.state.input;
 
-        // if a result was computed
-        if(this.state.done) {
-            // check if new input is operator,
-            if(["*", "/", ".", "+", "-", "^"].includes(new_input)) {
-                // if previous input was an operator, dont do anything
-                if(prev[prev.length -1] === new_input) {
-                    return;
-                }
-                // if previous was a number, append input with operator
-                this.setState({
-                    input: this.state.input + new_input,
-                    done: false
-                })
-            // if new input is number, replace input with number.
-            } else {
+        if(["*", "/", ".", "+", "-", "^"].includes(new_input)) {
+            if(prev[prev.length -1] === new_input) {
+                return;
+            }
+        }
+
+        if(this.state.done === true) {
+            if(isNaN(this.state.input)) {
                 this.setState({
                     input: new_input,
                     done: false
                 })
+            } else {
+                if(["*", "/", ".", "+", "-", "^"].includes(new_input)) {
+                    this.setState({
+                        input: this.state.input + new_input,
+                        done: false
+                    }) 
+                } else {
+                    this.setState({
+                        input: new_input,
+                        done: false
+                    }) 
+                }
             }
-        // else if result wasnt computed yet, append new input with input.
         } else {
             this.setState({
                 input: this.state.input + new_input,
+                done: false
             })
         }
     }
@@ -69,7 +75,7 @@ class App extends Component {
     //  adds expression and result to history state
     addToHistory = (new_exp, result) => {
         this.setState({
-            history: [...this.state.history, {exp: new_exp, result: result}],
+            history: [...this.state.history, {exp: new_exp, result: result}]
         })
     }
 
@@ -85,6 +91,10 @@ class App extends Component {
         if(this.state.input !== "") {
             try {
                 let result = math.eval(this.state.input)
+
+                if (this.state.input == result) {
+                    return;
+                }
 
                 this.addToHistory(this.state.input, result)
                 this.setState({

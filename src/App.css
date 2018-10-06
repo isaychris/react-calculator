@@ -56,6 +56,10 @@ body {
     color: gray;
 }
 
+.exp {
+    font-size: 20px;
+}
+
 .row {
     width: 100%;
     display: flex;
