@@ -17,14 +17,43 @@ class App extends Component {
         }
     }
 
-    // callback for display component; handles and filters the changing input from keyboard.
-    handleChange = (e) => {
-        let char = e.target.value[e.target.value.length - 1]
+    // when app component loads into dom, add keybinding event listener
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKey);
+    }
 
+    // logic for binding keypresses with buttons
+    handleKey = (e) => {
         if(["*", "/", ".", "+", "-", "^", 
             "(", ")", "0", "1", "2", "3", 
-            "4", "5", "6", "7", "8", "9", undefined].includes(char)) {
-            this.setState({input: e.target.value})
+            "4", "5", "6", "7", "8", "9", "="].includes(e.key)){
+            let key = document.querySelector(`button[data-key="${e.key}"]`)
+            key.click()
+            key.focus()
+        } else {
+            switch(e.key) {
+                case "Backspace":
+                    e.preventDefault()
+                    if(isNaN(this.state.input)) {
+                        this.setState({input: ""})
+                    } else {
+                        if(this.state.input.length !== 0)
+                        this.setState({input: this.state.input.slice(0, -1)})
+                    }
+                    break;
+                case "Enter":     
+                    let enter = document.querySelector(`button[data-key="="]`)
+                    enter.click()
+                    enter.focus()     
+                    break;
+                case "c":     
+                    let clear = document.querySelector(`button[data-key="Clear"]`)
+                    clear.click()
+                    clear.focus()     
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -92,7 +121,7 @@ class App extends Component {
             try {
                 let result = math.eval(this.state.input)
 
-                if (this.state.input == result) {
+                if (this.state.input === result) {
                     return;
                 }
 
@@ -103,13 +132,14 @@ class App extends Component {
                 })
             } catch (e) {
                 this.setState({
-                    input: "ERROR",
+                    input: "Error",
                     done: true
                 })
             }
         }
     }
 
+    // renders jsx into dom
     render() {
         return (
             <div className="App container">

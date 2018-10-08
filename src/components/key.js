@@ -9,7 +9,7 @@ class Key extends Component {
     
     render() {
         return (
-            <button onClick={(e) => this.handleClick(e)}>
+            <button data-key={this.props.value} onClick={(e) => this.handleClick(e)}>
             {this.props.value}
           </button>
         );
