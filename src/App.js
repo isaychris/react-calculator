@@ -34,11 +34,15 @@ class App extends Component {
             switch(e.key) {
                 case "Backspace":
                     e.preventDefault()
-                    if(isNaN(this.state.input)) {
+                    if(["Error", "Infinity", "Ready"].includes(this.state.input)) {
                         this.setState({input: ""})
                     } else {
-                        if(this.state.input.length !== 0)
-                        this.setState({input: this.state.input.slice(0, -1)})
+                        console.log(this.state.input)
+                        console.log(this.state.input.length)
+
+                        if(this.state.input.length !== 0) {
+                            this.setState({input: this.state.input.slice(0, -1)})
+                        }
                     }
                     break;
                 case "Enter":     
@@ -125,9 +129,9 @@ class App extends Component {
                     return;
                 }
 
-                this.addToHistory(this.state.input, result)
+                this.addToHistory(this.state.input, result.toString())
                 this.setState({
-                    input: result,
+                    input: result.toString(),
                     done: true
                 })
             } catch (e) {
